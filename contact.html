@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us – CarePlus Hospital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-info">
+        <span class="top-bar-item"><i class="fa-solid fa-phone"></i> +91 9876543210</span>
+        <span class="top-bar-item"><i class="fa-solid fa-envelope"></i> careplus@hospital.com</span>
+      </div>
+      <div class="top-bar-badges">
+        <span class="top-bar-item"><i class="fa-solid fa-truck-medical"></i> 24×7 Emergency</span>
+        <span class="top-bar-item badge-emergency"><i class="fa-solid fa-certificate"></i> NABH Accredited</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="main-header">
+    <div class="container">
+      <a href="{{ url_for('index') }}" class="brand-logo">
+        <div class="logo-icon"><i class="fa-solid fa-hospital"></i></div>
+        <span class="logo-text">CarePlus Hospital</span>
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+        <a href="{{ url_for('index') }}#services" class="nav-link">Services</a>
+        <a href="{{ url_for('index') }}#departments" class="nav-link">Departments</a>
+        <a href="{{ url_for('index') }}#doctors" class="nav-link">Doctors</a>
+        <a href="{{ url_for('index') }}#gallery" class="nav-link">Gallery</a>
+        <a href="{{ url_for('appointment') }}" class="nav-link">Appointment</a>
+        <a href="{{ url_for('contact') }}" class="nav-link active">Contact</a>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <button class="btn-dark-toggle" id="darkToggleBtn">
+          <i class="fa-solid fa-moon"></i> Dark
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Banner -->
+  <div style="background: var(--primary-gradient); color: #FFFFFF; padding: 140px 20px 50px; text-align: center;">
+    <div class="container">
+      <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 10px;">Get In Touch</h1>
+      <p style="font-size: 1.1rem; opacity: 0.95; max-width: 600px; margin: 0 auto;">We are here to support your healthcare inquiries and emergency needs 24×7.</p>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <div class="section-padding">
+    <div class="container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div style="background: #dcfce7; color:#15803d; border:1px solid #86efac; padding: 16px 20px; border-radius: 12px; margin-bottom: 30px; font-weight: 500; text-align: center;">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 35px;">
+        <!-- Left Contact Info -->
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div style="background: var(--bg-card); padding: 30px; border-radius: var(--radius-card); box-shadow: var(--shadow-card); display: flex; align-items: center; gap: 20px;">
+            <div style="width: 55px; height: 55px; border-radius: 50%; background: rgba(8,123,250,0.1); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+              <i class="fa-solid fa-phone-volume"></i>
+            </div>
+            <div>
+              <h4 style="color: var(--heading-color); font-size: 1.1rem; margin-bottom: 4px;">Emergency Hotline</h4>
+              <p style="color: #ff2a6d; font-weight: 700; font-size: 1.15rem;">+91 9876543210</p>
+              <span style="font-size: 0.85rem; color: var(--text-color);">Open 24 hours, 7 days a week</span>
+            </div>
+          </div>
+
+          <div style="background: var(--bg-card); padding: 30px; border-radius: var(--radius-card); box-shadow: var(--shadow-card); display: flex; align-items: center; gap: 20px;">
+            <div style="width: 55px; height: 55px; border-radius: 50%; background: rgba(0,188,212,0.1); color: var(--secondary); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+              <i class="fa-solid fa-envelope-open-text"></i>
+            </div>
+            <div>
+              <h4 style="color: var(--heading-color); font-size: 1.1rem; margin-bottom: 4px;">General Enquiries</h4>
+              <p style="color: var(--heading-color); font-weight: 600;">careplus@hospital.com</p>
+              <span style="font-size: 0.85rem; color: var(--text-color);">Response within 24 hours</span>
+            </div>
+          </div>
+
+          <div style="background: var(--bg-card); padding: 30px; border-radius: var(--radius-card); box-shadow: var(--shadow-card); display: flex; align-items: center; gap: 20px;">
+            <div style="width: 55px; height: 55px; border-radius: 50%; background: rgba(8,123,250,0.1); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div>
+              <h4 style="color: var(--heading-color); font-size: 1.1rem; margin-bottom: 4px;">Hospital Campus</h4>
+              <p style="color: var(--heading-color); font-weight: 500; font-size: 0.95rem;">100 Health Boulevard, Medical Enclave, City Center</p>
+              <span style="font-size: 0.85rem; color: var(--text-color);">Dedicated ambulance gate & visitor parking</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Form -->
+        <div style="background: var(--bg-card); padding: 40px; border-radius: var(--radius-card); box-shadow: var(--shadow-card);">
+          <h3 style="color: var(--heading-color); font-size: 1.5rem; margin-bottom: 20px;">Send Us A Message</h3>
+          <form method="POST" action="{{ url_for('contact') }}">
+            <div class="form-group">
+              <label class="form-label" for="name">Your Full Name *</label>
+              <input type="text" name="name" id="name" class="form-control" placeholder="e.g. Sarah Connor" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="email">Email Address *</label>
+              <input type="email" name="email" id="email" class="form-control" placeholder="sarah@example.com" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="phone">Phone Number</label>
+              <input type="tel" name="phone" id="phone" class="form-control" placeholder="+91 9876543210">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="subject">Subject</label>
+              <input type="text" name="subject" id="subject" class="form-control" placeholder="e.g. Insurance Claim, Feedback, Enquiry">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="message">Your Message *</label>
+              <textarea name="message" id="message" class="form-control" rows="4" placeholder="How can our hospital team assist you?" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+              <i class="fa-solid fa-paper-plane"></i> Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 CarePlus Hospital. All Rights Reserved. Accredited by NABH standards.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,1504 @@
+/* ==========================================================================
+   CarePlus Hospital - Modern Responsive Hospital Website
+   Theme: Primary #087BFA, Secondary #00BCD4, Background #EEF7FF
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --primary: #087BFA;
+  --primary-hover: #0066d6;
+  --secondary: #00BCD4;
+  --secondary-hover: #00acc1;
+  --accent-cyan: #00e5be;
+  --navy: #0A2540;
+  --heading-color: #0A2540;
+  --text-color: #556987;
+  --bg-main: #EEF7FF;
+  --bg-card: #FFFFFF;
+  --border-color: #E2E8F0;
+  --topbar-bg: #0088d1;
+  --navbar-bg: #FFFFFF;
+  --footer-bg: #0A192F;
+  --primary-gradient: linear-gradient(135deg, #087BFA 0%, #00BCD4 100%);
+  --department-gradient: linear-gradient(135deg, #0288d1 0%, #00BCD4 100%);
+  --stats-gradient: linear-gradient(90deg, #0288d1 0%, #00acc1 100%);
+  --emergency-gradient: linear-gradient(90deg, #ff2a6d 0%, #ff5722 100%);
+  --dark-toggle-bg: linear-gradient(135deg, #8a2be2 0%, #9c27b0 100%);
+  --shadow-card: 0 12px 30px rgba(8, 123, 250, 0.08);
+  --shadow-hover: 0 20px 40px rgba(8, 123, 250, 0.16);
+  --shadow-sm: 0 4px 12px rgba(8, 123, 250, 0.05);
+  --radius-card: 22px;
+  --radius-pill: 50px;
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+[data-theme="dark"] {
+  --primary: #298bff;
+  --secondary: #00d2eb;
+  --heading-color: #F8FAFC;
+  --text-color: #CBD5E1;
+  --bg-main: #0B132B;
+  --bg-card: #1C2541;
+  --border-color: #2D3748;
+  --topbar-bg: #070D1F;
+  --navbar-bg: #111D38;
+  --footer-bg: #060B18;
+  --shadow-card: 0 12px 30px rgba(0, 0, 0, 0.45);
+  --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.6);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Base & Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-color);
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Section Header Utility */
+.section-header {
+  text-align: center;
+  margin-bottom: 45px;
+  position: relative;
+}
+
+.section-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--heading-color);
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-color);
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   2. TOP BAR & FIXED HEADER
+   ========================================================================== */
+
+.top-bar {
+  background: var(--topbar-bg);
+  color: #FFFFFF;
+  font-size: 0.85rem;
+  padding: 8px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+  transition: var(--transition);
+}
+
+.top-bar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.top-bar-info, .top-bar-badges {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.top-bar-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.top-bar-item i {
+  font-size: 0.95rem;
+}
+
+.badge-emergency {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+}
+
+/* Main Navigation Bar */
+.main-header {
+  background: var(--navbar-bg);
+  box-shadow: 0 4px 20px rgba(8, 123, 250, 0.08);
+  position: fixed;
+  top: 36px;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: var(--transition);
+}
+
+.main-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
+/* Logo */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.logo-icon {
+  width: 42px;
+  height: 42px;
+  background: var(--primary-gradient);
+  color: #FFFFFF;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  box-shadow: 0 6px 15px rgba(8, 123, 250, 0.3);
+}
+
+.logo-text {
+  background: linear-gradient(135deg, #087BFA 0%, #00BCD4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Nav Links */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-link {
+  font-weight: 500;
+  font-size: 0.98rem;
+  color: var(--heading-color);
+  padding: 6px 0;
+  position: relative;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--primary);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2.5px;
+  background: var(--primary-gradient);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+  width: 100%;
+}
+
+/* Dark Mode Pill Button */
+.btn-dark-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--dark-toggle-bg);
+  color: #FFFFFF;
+  border: none;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(138, 43, 226, 0.35);
+  transition: var(--transition);
+}
+
+.btn-dark-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(138, 43, 226, 0.5);
+}
+
+/* Mobile Toggle */
+.mobile-nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: var(--heading-color);
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   3. HERO SECTION
+   ========================================================================== */
+
+.hero-section {
+  position: relative;
+  min-height: 580px;
+  margin-top: 106px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(rgba(10, 37, 64, 0.72), rgba(10, 37, 64, 0.82)),
+              url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1600&q=80') center center / cover no-repeat;
+  color: #FFFFFF;
+  padding: 80px 20px;
+}
+
+.hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hero-title {
+  font-size: 3.2rem;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 18px;
+  color: #FFFFFF;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  font-weight: 400;
+  margin-bottom: 35px;
+  color: #E2E8F0;
+  letter-spacing: 0.5px;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 30px;
+  border-radius: var(--radius-pill);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: var(--transition);
+}
+
+.btn-primary {
+  background: var(--primary-gradient);
+  color: #FFFFFF;
+  box-shadow: 0 8px 25px rgba(8, 123, 250, 0.35);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(8, 123, 250, 0.5);
+}
+
+.btn-accent {
+  background: linear-gradient(135deg, #00c896 0%, #00b4d8 100%);
+  color: #FFFFFF;
+  box-shadow: 0 8px 25px rgba(0, 200, 150, 0.35);
+}
+
+.btn-accent:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 200, 150, 0.5);
+}
+
+.btn-light {
+  background: #FFFFFF;
+  color: var(--navy);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn-light:hover {
+  background: #F1F5F9;
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   3.1 COLORFUL EMERGENCY BANNER
+   ========================================================================== */
+
+.emergency-banner {
+  background: var(--emergency-gradient);
+  color: #FFFFFF;
+  padding: 14px 0;
+  box-shadow: 0 4px 15px rgba(255, 42, 109, 0.25);
+}
+
+.emergency-banner .container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+.emergency-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.emergency-item i {
+  font-size: 1.2rem;
+}
+
+/* ==========================================================================
+   4. PREMIUM SERVICES & 5. QUICK ACCESS
+   ========================================================================== */
+
+.section-padding {
+  padding: 70px 0;
+}
+
+/* Card Grids */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.service-card {
+  background: var(--bg-card);
+  padding: 35px 25px;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid transparent;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+  border-color: rgba(8, 123, 250, 0.2);
+}
+
+.service-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: rgba(8, 123, 250, 0.08);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  transition: var(--transition);
+}
+
+.service-card:hover .service-icon {
+  background: var(--primary-gradient);
+  color: #FFFFFF;
+  transform: scale(1.1);
+}
+
+.service-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--heading-color);
+  margin-bottom: 12px;
+}
+
+.service-desc {
+  font-size: 0.92rem;
+  color: var(--text-color);
+}
+
+/* Quick Access Cards */
+.quick-access-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+}
+
+.quick-card {
+  background: var(--bg-card);
+  padding: 35px 30px;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1px solid rgba(8, 123, 250, 0.06);
+}
+
+.quick-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary);
+}
+
+.quick-icon {
+  font-size: 2.8rem;
+  color: var(--primary);
+  margin-bottom: 20px;
+  transition: var(--transition);
+}
+
+.quick-card:hover .quick-icon {
+  transform: scale(1.12);
+  color: var(--secondary);
+}
+
+.quick-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--heading-color);
+  margin-bottom: 10px;
+}
+
+.quick-desc {
+  font-size: 0.92rem;
+  color: var(--text-color);
+}
+
+/* ==========================================================================
+   6. HOSPITAL STATISTICS (Blue Gradient Bar with Animated Counters)
+   ========================================================================== */
+
+.stats-section {
+  background: var(--stats-gradient);
+  color: #FFFFFF;
+  padding: 55px 0;
+  box-shadow: 0 10px 30px rgba(2, 136, 209, 0.25);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 30px;
+  text-align: center;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-number {
+  font-size: 3.2rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 1.05rem;
+  font-weight: 500;
+  opacity: 0.95;
+}
+
+/* ==========================================================================
+   7. WHY PATIENTS TRUST US
+   ========================================================================== */
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.trust-card {
+  background: var(--bg-card);
+  padding: 35px 25px;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+  transition: var(--transition);
+}
+
+.trust-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+}
+
+.trust-icon {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 18px;
+}
+
+.trust-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--heading-color);
+  margin-bottom: 12px;
+}
+
+.trust-desc {
+  font-size: 0.92rem;
+  color: var(--text-color);
+}
+
+/* ==========================================================================
+   8. MEET OUR SPECIALISTS (Horizontal Doctor Cards)
+   ========================================================================== */
+
+.doctors-scroll-wrapper {
+  overflow-x: auto;
+  padding-bottom: 15px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) transparent;
+}
+
+.doctors-grid {
+  display: flex;
+  gap: 25px;
+  min-width: 100%;
+}
+
+.doctor-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  flex: 0 0 270px;
+  text-align: center;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.doctor-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+}
+
+.doctor-img-box {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  position: relative;
+  background: #E2E8F0;
+}
+
+.doctor-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.doctor-card:hover .doctor-img-box img {
+  transform: scale(1.06);
+}
+
+.doctor-info {
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.doctor-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--heading-color);
+  margin-bottom: 4px;
+}
+
+.doctor-spec {
+  font-size: 0.9rem;
+  color: var(--primary);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.doctor-rating {
+  color: #FFB800;
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+}
+
+.doctor-btn {
+  margin-top: auto;
+  padding: 8px 18px;
+  font-size: 0.88rem;
+  align-self: center;
+}
+
+/* ==========================================================================
+   9. OUR DEPARTMENTS (Blue Gradient Cards with Large Emojis/Icons)
+   ========================================================================== */
+
+.departments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.dept-card {
+  background: var(--department-gradient);
+  border-radius: var(--radius-card);
+  padding: 45px 25px;
+  text-align: center;
+  color: #FFFFFF;
+  box-shadow: 0 12px 30px rgba(0, 188, 212, 0.28);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  cursor: pointer;
+}
+
+.dept-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 40px rgba(0, 188, 212, 0.45);
+}
+
+.dept-emoji {
+  font-size: 3.5rem;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.dept-card:hover .dept-emoji {
+  transform: scale(1.15);
+}
+
+.dept-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   10. HOSPITAL JOURNEY (Horizontal Timeline)
+   ========================================================================== */
+
+.timeline-wrapper {
+  position: relative;
+  padding: 40px 0;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 75px;
+  left: 5%;
+  right: 5%;
+  height: 4px;
+  background: rgba(8, 123, 250, 0.2);
+  z-index: 1;
+}
+
+.timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.timeline-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timeline-circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(8, 123, 250, 0.35);
+  margin-bottom: 18px;
+  transition: var(--transition);
+  border: 4px solid var(--bg-main);
+}
+
+.timeline-node:hover .timeline-circle {
+  transform: scale(1.15);
+  background: var(--secondary);
+}
+
+.timeline-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--heading-color);
+}
+
+/* ==========================================================================
+   11. HOSPITAL GALLERY
+   ========================================================================== */
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+}
+
+.gallery-item {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  height: 250px;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  cursor: pointer;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.08);
+}
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10, 37, 64, 0.85) 0%, transparent 60%);
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+  color: #FFFFFF;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-overlay h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   12. HEALTH CALCULATOR (BMI & Heart Rate)
+   ========================================================================== */
+
+.calculator-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 30px;
+}
+
+.calc-card {
+  background: var(--bg-card);
+  padding: 35px 30px;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(8, 123, 250, 0.08);
+}
+
+.calc-header {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--heading-color);
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--heading-color);
+  margin-bottom: 6px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  font-size: 0.95rem;
+  background: var(--bg-main);
+  color: var(--heading-color);
+  transition: var(--transition);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(8, 123, 250, 0.15);
+  background: #FFFFFF;
+}
+
+.calc-result-box {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 12px;
+  background: rgba(8, 123, 250, 0.06);
+  text-align: center;
+  min-height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  color: var(--heading-color);
+}
+
+.calc-note {
+  font-size: 0.8rem;
+  color: var(--text-color);
+  margin-top: 15px;
+  font-style: italic;
+  text-align: center;
+}
+
+/* ==========================================================================
+   13. HOSPITAL LIVE STATUS
+   ========================================================================== */
+
+.live-status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 25px;
+}
+
+.live-status-card {
+  background: linear-gradient(135deg, #0288d1 0%, #00b4d8 100%);
+  border-radius: var(--radius-card);
+  padding: 35px 20px;
+  text-align: center;
+  color: #FFFFFF;
+  box-shadow: 0 10px 25px rgba(2, 136, 209, 0.28);
+  transition: var(--transition);
+}
+
+.live-status-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 35px rgba(2, 136, 209, 0.4);
+}
+
+.live-stat-val {
+  font-size: 2.8rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.live-stat-label {
+  font-size: 1.05rem;
+  font-weight: 500;
+  opacity: 0.95;
+}
+
+/* ==========================================================================
+   14. BLOOD BANK AVAILABILITY
+   ========================================================================== */
+
+.blood-bank-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 20px;
+}
+
+.blood-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: 25px 15px;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+  transition: var(--transition);
+  border: 1px solid rgba(255, 42, 109, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.blood-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+  border-color: #ff2a6d;
+}
+
+.blood-group-badge {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff2a6d 0%, #ff5722 100%);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+  box-shadow: 0 6px 15px rgba(255, 42, 109, 0.3);
+}
+
+.blood-units {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--heading-color);
+  margin-bottom: 4px;
+}
+
+.blood-unit-label {
+  font-size: 0.8rem;
+  color: var(--text-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.blood-status-badge {
+  margin-top: 10px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-available { background: #dcfce7; color: #15803d; }
+.badge-low { background: #fef9c3; color: #854d0e; }
+.badge-critical { background: #fee2e2; color: #b91c1c; }
+
+/* ==========================================================================
+   15. HEALTH TIPS (Auto-Changing Carousel)
+   ========================================================================== */
+
+.tips-carousel-box {
+  background: linear-gradient(135deg, #087BFA 0%, #00acc1 100%);
+  color: #FFFFFF;
+  border-radius: var(--radius-card);
+  padding: 45px 35px;
+  box-shadow: 0 15px 35px rgba(8, 123, 250, 0.25);
+  position: relative;
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.tip-content-slide {
+  transition: opacity 0.4s ease;
+}
+
+.tip-icon {
+  font-size: 2.8rem;
+  margin-bottom: 16px;
+  color: #ffea79;
+}
+
+.tip-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.tip-text {
+  font-size: 1.1rem;
+  opacity: 0.95;
+  line-height: 1.7;
+}
+
+.tip-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 25px;
+}
+
+.tip-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.tip-dot.active {
+  background: #FFFFFF;
+  width: 28px;
+  border-radius: 10px;
+}
+
+/* ==========================================================================
+   16. BOOK AMBULANCE & 17. APPOINTMENT BOOKING
+   ========================================================================== */
+
+.booking-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.form-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+/* ==========================================================================
+   18. FLOATING CHATBOT & FLOATING UTILITY BUTTONS
+   ========================================================================== */
+
+/* Floating Chatbot Button (Bottom-Left) */
+.floating-bot-btn {
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--primary-gradient);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  box-shadow: 0 8px 25px rgba(8, 123, 250, 0.4);
+  cursor: pointer;
+  z-index: 999;
+  border: none;
+  transition: var(--transition);
+}
+
+.floating-bot-btn:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 12px 30px rgba(8, 123, 250, 0.6);
+}
+
+/* Chatbot Modal Box */
+.chatbot-box {
+  position: fixed;
+  bottom: 95px;
+  left: 25px;
+  width: 360px;
+  max-width: calc(100vw - 40px);
+  height: 480px;
+  background: var(--bg-card);
+  border-radius: 20px;
+  box-shadow: 0 15px 45px rgba(10, 37, 64, 0.25);
+  display: none;
+  flex-direction: column;
+  z-index: 1000;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  animation: slideUp 0.3s ease;
+}
+
+.chatbot-box.active {
+  display: flex;
+}
+
+.chat-header {
+  background: var(--primary-gradient);
+  color: #FFFFFF;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chat-header-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chat-close-btn {
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.chat-messages {
+  flex-grow: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--bg-main);
+}
+
+.chat-bubble {
+  max-width: 82%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.chat-bubble.bot {
+  background: var(--bg-card);
+  color: var(--heading-color);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+  box-shadow: var(--shadow-sm);
+}
+
+.chat-bubble.user {
+  background: var(--primary);
+  color: #FFFFFF;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-quick-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 8px 12px;
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-color);
+}
+
+.chat-tag {
+  background: rgba(8, 123, 250, 0.08);
+  color: var(--primary);
+  font-size: 0.76rem;
+  font-weight: 500;
+  padding: 4px 9px;
+  border-radius: 12px;
+  cursor: pointer;
+  border: none;
+}
+
+.chat-tag:hover {
+  background: var(--primary);
+  color: #FFFFFF;
+}
+
+.chat-input-bar {
+  display: flex;
+  padding: 10px;
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-color);
+  gap: 8px;
+}
+
+.chat-input-bar input {
+  flex-grow: 1;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  background: var(--bg-main);
+  color: var(--heading-color);
+}
+
+.chat-input-bar button {
+  background: var(--primary);
+  color: #FFFFFF;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Floating Utility Buttons on Right Side */
+.floating-utilities {
+  position: fixed;
+  right: 20px;
+  top: 55%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 998;
+}
+
+.util-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  box-shadow: 0 4px 15px rgba(8, 123, 250, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.util-btn:hover {
+  transform: scale(1.15);
+  background: var(--primary);
+  color: #FFFFFF;
+}
+
+.util-btn.util-emergency {
+  color: #ff2a6d;
+}
+
+.util-btn.util-emergency:hover {
+  background: #ff2a6d;
+  color: #FFFFFF;
+}
+
+/* Back to Top */
+.back-to-top {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #FFFFFF;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  z-index: 997;
+  transition: var(--transition);
+}
+
+.back-to-top.active {
+  display: flex;
+}
+
+.back-to-top:hover {
+  background: var(--primary);
+  transform: translateY(-3px);
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+.main-footer {
+  background: var(--footer-bg);
+  color: #A0AEC0;
+  padding: 65px 0 25px;
+  margin-top: 60px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+  margin-bottom: 45px;
+}
+
+.footer-col h4 {
+  color: #FFFFFF;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+}
+
+.footer-links a:hover {
+  color: var(--secondary);
+  padding-left: 5px;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
+}
+
+/* Modal Popup */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-content {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: 35px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: var(--shadow-hover);
+  position: relative;
+  text-align: center;
+  animation: zoomIn 0.25s ease;
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 18px;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--heading-color);
+  cursor: pointer;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes zoomIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (Tablets & Mobile)
+   ========================================================================== */
+
+@media (max-width: 992px) {
+  .top-bar {
+    display: none;
+  }
+  .main-header {
+    top: 0;
+  }
+  .hero-section {
+    margin-top: 70px;
+    min-height: 500px;
+  }
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  .timeline-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .timeline-line {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-nav-toggle {
+    display: block;
+  }
+  .nav-menu {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: var(--navbar-bg);
+    flex-direction: column;
+    padding: 25px;
+    gap: 18px;
+    box-shadow: var(--shadow-card);
+    transform: translateY(-150%);
+    transition: var(--transition);
+  }
+  .nav-menu.active {
+    transform: translateY(0);
+  }
+  .hero-title {
+    font-size: 2rem;
+  }
+  .floating-utilities {
+    display: none;
+  }
+}

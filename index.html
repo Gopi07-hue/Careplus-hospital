@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CarePlus Hospital – Advanced Healthcare For Everyone</title>
+
+  <!-- Google Fonts (Poppins) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       TOP INFORMATION BAR
+       ========================================================================== -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-info">
+        <span class="top-bar-item"><i class="fa-solid fa-phone"></i> +91 9876543210</span>
+        <span class="top-bar-item"><i class="fa-solid fa-envelope"></i> careplus@hospital.com</span>
+      </div>
+      <div class="top-bar-badges">
+        <span class="top-bar-item"><i class="fa-solid fa-truck-medical"></i> 24×7 Emergency</span>
+        <span class="top-bar-item badge-emergency"><i class="fa-solid fa-certificate"></i> NABH Accredited</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MAIN FIXED NAVIGATION BAR
+       ========================================================================== -->
+  <header class="main-header">
+    <div class="container">
+      <a href="{{ url_for('index') }}" class="brand-logo">
+        <div class="logo-icon"><i class="fa-solid fa-hospital"></i></div>
+        <span class="logo-text">CarePlus Hospital</span>
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#departments" class="nav-link">Departments</a>
+        <a href="#doctors" class="nav-link">Doctors</a>
+        <a href="#gallery" class="nav-link">Gallery</a>
+        <a href="#appointment" class="nav-link">Appointment</a>
+        <a href="{{ url_for('contact') }}" class="nav-link">Contact</a>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <button class="btn-dark-toggle" id="darkToggleBtn" title="Toggle Dark/Light Mode">
+          <i class="fa-solid fa-moon"></i> Dark
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       HERO SECTION
+       ========================================================================== -->
+  <section class="hero-section" id="home">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Advanced Healthcare For Everyone</h1>
+        <p class="hero-subtitle">World-Class Doctors • Smart Technology • 24×7 Emergency Care • Compassionate Treatment</p>
+        <div class="hero-actions">
+          <a href="#appointment" class="btn btn-accent"><i class="fa-solid fa-calendar-check"></i> Book Appointment</a>
+          <a href="#services" class="btn btn-light"><i class="fa-solid fa-stethoscope"></i> Explore Services</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       COLORFUL EMERGENCY BANNER
+       ========================================================================== -->
+  <div class="emergency-banner">
+    <div class="container">
+      <div class="emergency-item">
+        <i class="fa-solid fa-bell"></i>
+        <span>Emergency : +91 9876543210</span>
+      </div>
+      <div class="emergency-item">
+        <i class="fa-solid fa-hospital-user"></i>
+        <span>Open 24 × 7</span>
+      </div>
+      <div class="emergency-item">
+        <i class="fa-solid fa-user-doctor"></i>
+        <span>120+ Specialist Doctors</span>
+      </div>
+      <div class="emergency-item">
+        <i class="fa-solid fa-bolt"></i>
+        <span>Ambulance Within 10 Minutes</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       OUR PREMIUM SERVICES
+       ========================================================================== -->
+  <section class="section-padding" id="services">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Our Premium Services</h2>
+        <p class="section-subtitle">Delivering high standard medical care with cutting-edge diagnostics and compassion</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-lungs"></i></div>
+          <h3 class="service-title">Pulmonology</h3>
+          <p class="service-desc">Expert treatment for respiratory diseases, asthma, and specialized pulmonary care.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-user-doctor"></i></div>
+          <h3 class="service-title">General Medicine</h3>
+          <p class="service-desc">Complete health diagnosis and treatment for comprehensive adult wellness.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+          <h3 class="service-title">Cardiology</h3>
+          <p class="service-desc">Advanced heart treatment with modern catheterization labs and equipment.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-brain"></i></div>
+          <h3 class="service-title">Neurology</h3>
+          <p class="service-desc">Brain and nervous system specialists managing stroke, epilepsy, and neuro recovery.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-bone"></i></div>
+          <h3 class="service-title">Orthopedics</h3>
+          <p class="service-desc">Joint replacements, spine surgeries, trauma care, and sports injury recovery.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-baby"></i></div>
+          <h3 class="service-title">Pediatrics</h3>
+          <p class="service-desc">Gentle and dedicated healthcare for newborns, children, and adolescents.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-flask-vial"></i></div>
+          <h3 class="service-title">Laboratory Services</h3>
+          <p class="service-desc">Automated pathology, biochemistry, and microbiology delivering rapid reports.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-pills"></i></div>
+          <h3 class="service-title">Pharmacy</h3>
+          <p class="service-desc">24×7 in-house pharmacy dispensing verified, temperature-controlled medicines.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       QUICK ACCESS
+       ========================================================================== -->
+  <section class="section-padding" style="background: rgba(8, 123, 250, 0.03);">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Quick Access</h2>
+        <p class="section-subtitle">Instant digital healthcare services at your fingertips</p>
+      </div>
+
+      <div class="quick-access-grid">
+        <div class="quick-card" data-action="appointment">
+          <i class="fa-regular fa-calendar-check quick-icon"></i>
+          <h3 class="quick-title">Book Appointment</h3>
+          <p class="quick-desc">Book appointments instantly with our specialists without waiting in queues.</p>
+        </div>
+
+        <div class="quick-card" data-action="lab">
+          <i class="fa-solid fa-flask quick-icon"></i>
+          <h3 class="quick-title">Lab Reports</h3>
+          <p class="quick-desc">Download pathology reports securely online with your patient reference code.</p>
+        </div>
+
+        <div class="quick-card" data-action="pharmacy">
+          <i class="fa-solid fa-capsules quick-icon"></i>
+          <h3 class="quick-title">Online Pharmacy</h3>
+          <p class="quick-desc">Order medicines with doorstep delivery and genuine prescription verification.</p>
+        </div>
+
+        <div class="quick-card" data-action="emergency">
+          <i class="fa-solid fa-truck-medical quick-icon"></i>
+          <h3 class="quick-title">Emergency</h3>
+          <p class="quick-desc">Call ambulance immediately with one click and get live GPS dispatch support.</p>
+        </div>
+
+        <div class="quick-card" data-action="records">
+          <i class="fa-solid fa-file-waveform quick-icon"></i>
+          <h3 class="quick-title">Medical Records</h3>
+          <p class="quick-desc">Secure patient history, discharge summaries, and digital prescriptions.</p>
+        </div>
+
+        <div class="quick-card" data-action="insurance">
+          <i class="fa-solid fa-shield-halved quick-icon"></i>
+          <h3 class="quick-title">Health Insurance</h3>
+          <p class="quick-desc">Cashless treatment with 40+ leading insurance companies and TPAs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       HOSPITAL STATISTICS
+       ========================================================================== -->
+  <section class="stats-section" id="statistics">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number"><span class="counter-val" data-target="{{ stats['happy_patients'] if stats else 15000 }}">0</span>+</div>
+          <div class="stat-label">Happy Patients</div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-number"><span class="counter-val" data-target="{{ stats['doctors_count'] if stats else 120 }}">0</span>+</div>
+          <div class="stat-label">Doctors</div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-number"><span class="counter-val" data-target="{{ stats['departments_count'] if stats else 25 }}">0</span>+</div>
+          <div class="stat-label">Departments</div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-number"><span class="counter-val" data-target="{{ stats['surgeries_count'] if stats else 18500 }}">0</span>+</div>
+          <div class="stat-label">Successful Surgeries</div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-number"><span class="counter-val" data-target="{{ stats['awards_count'] if stats else 45 }}">0</span>+</div>
+          <div class="stat-label">Awards</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       WHY PATIENTS TRUST US
+       ========================================================================== -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Why Patients Trust Us</h2>
+        <p class="section-subtitle">Excellence, dedication, and patient safety are at the core of everything we do</p>
+      </div>
+
+      <div class="trust-grid">
+        <div class="trust-card">
+          <i class="fa-solid fa-award trust-icon"></i>
+          <h3 class="trust-title">25+ Years Experience</h3>
+          <p class="trust-desc">Providing quality healthcare with experienced medical professionals and specialists.</p>
+        </div>
+
+        <div class="trust-card">
+          <i class="fa-solid fa-users trust-icon"></i>
+          <h3 class="trust-title">15,000+ Happy Patients</h3>
+          <p class="trust-desc">Thousands of successful treatments every year with remarkable recovery ratios.</p>
+        </div>
+
+        <div class="trust-card">
+          <i class="fa-solid fa-microscope trust-icon"></i>
+          <h3 class="trust-title">Modern Equipment</h3>
+          <p class="trust-desc">MRI, CT Scan, Robotic Surgery, and Smart ICU systems for pinpoint diagnostics.</p>
+        </div>
+
+        <div class="trust-card">
+          <i class="fa-solid fa-clock trust-icon"></i>
+          <h3 class="trust-title">24 × 7 Support</h3>
+          <p class="trust-desc">Doctors, Pharmacy and Emergency Services available all day and night.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       MEET OUR SPECIALISTS
+       ========================================================================== -->
+  <section class="section-padding" id="doctors" style="background: rgba(8, 123, 250, 0.03);">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Meet Our Specialists</h2>
+        <p class="section-subtitle">Consult with internationally acclaimed medical professionals and surgeons</p>
+      </div>
+
+      <div class="doctors-scroll-wrapper">
+        <div class="doctors-grid">
+          {% for doc in doctors %}
+          <div class="doctor-card">
+            <div class="doctor-img-box">
+              <img src="{{ doc['image_url'] }}" alt="{{ doc['name'] }}" loading="lazy">
+            </div>
+            <div class="doctor-info">
+              <h3 class="doctor-name">{{ doc['name'] }}</h3>
+              <p class="doctor-spec">{{ doc['specialization'] }}</p>
+              <div class="doctor-rating">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <a href="#appointment" class="btn btn-primary doctor-btn" onclick="document.getElementById('aptDept').value='{{ doc['department'] }}'; document.getElementById('aptDoctor').value='{{ doc['name'] }}';">Book Consultation</a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       OUR DEPARTMENTS
+       ========================================================================== -->
+  <section class="section-padding" id="departments">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Our Departments</h2>
+        <p class="section-subtitle">Centers of medical excellence specializing in focused therapeutic disciplines</p>
+      </div>
+
+      <div class="departments-grid">
+        <div class="dept-card" onclick="location.href='#appointment'; document.getElementById('aptDept').value='Cardiology';">
+          <div class="dept-emoji">❤️</div>
+          <h3 class="dept-title">Cardiology</h3>
+        </div>
+
+        <div class="dept-card" onclick="location.href='#appointment'; document.getElementById('aptDept').value='Neurology';">
+          <div class="dept-emoji">🧠</div>
+          <h3 class="dept-title">Neurology</h3>
+        </div>
+
+        <div class="dept-card" onclick="location.href='#appointment'; document.getElementById('aptDept').value='Orthopedics';">
+          <div class="dept-emoji">🦴</div>
+          <h3 class="dept-title">Orthopedics</h3>
+        </div>
+
+        <div class="dept-card" onclick="location.href='#appointment'; document.getElementById('aptDept').value='Pediatrics';">
+          <div class="dept-emoji">👶</div>
+          <h3 class="dept-title">Pediatrics</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       HOSPITAL JOURNEY (TIMELINE)
+       ========================================================================== -->
+  <section class="section-padding" style="background: rgba(8, 123, 250, 0.03);">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Hospital Journey</h2>
+        <p class="section-subtitle">Over two decades of healthcare milestones, innovations, and patient service</p>
+      </div>
+
+      <div class="timeline-wrapper">
+        <div class="timeline-line"></div>
+        <div class="timeline-grid">
+          <div class="timeline-node">
+            <div class="timeline-circle">1998</div>
+            <div class="timeline-label">Hospital Founded</div>
+          </div>
+
+          <div class="timeline-node">
+            <div class="timeline-circle">2007</div>
+            <div class="timeline-label">ICU Started</div>
+          </div>
+
+          <div class="timeline-node">
+            <div class="timeline-circle">2015</div>
+            <div class="timeline-label">NABH Certified</div>
+          </div>
+
+          <div class="timeline-node">
+            <div class="timeline-circle">2022</div>
+            <div class="timeline-label">Robotic Surgery</div>
+          </div>
+
+          <div class="timeline-node">
+            <div class="timeline-circle">2026</div>
+            <div class="timeline-label">AI Healthcare</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       HOSPITAL GALLERY
+       ========================================================================== -->
+  <section class="section-padding" id="gallery">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Hospital Gallery</h2>
+        <p class="section-subtitle">Take a virtual tour through our world-class medical facilities and sterile units</p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80" alt="Hospital Reception Desk">
+          <div class="gallery-overlay"><h4>Hospital Reception</h4></div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=800&q=80" alt="Patient Rooms & ICU Beds">
+          <div class="gallery-overlay"><h4>Patient Rooms & Ward</h4></div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80" alt="Medical Diagnostics & Equipment">
+          <div class="gallery-overlay"><h4>Medical Equipment & Digital Desk</h4></div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=800&q=80" alt="Hospital Pharmacy">
+          <div class="gallery-overlay"><h4>Hospital Pharmacy</h4></div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=800&q=80" alt="Doctors and Medical Instruments">
+          <div class="gallery-overlay"><h4>Doctors & Medical Instruments</h4></div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&w=800&q=80" alt="Stethoscope & Vital Monitoring">
+          <div class="gallery-overlay"><h4>Vital Monitoring & Diagnosis</h4></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       HEALTH CALCULATOR
+       ========================================================================== -->
+  <section class="section-padding" id="calculator" style="background: rgba(8, 123, 250, 0.03);">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Health Calculator</h2>
+        <p class="section-subtitle">Quick health assessment tools for educational monitoring</p>
+      </div>
+
+      <div class="calculator-grid">
+        <!-- BMI Calculator -->
+        <div class="calc-card">
+          <h3 class="calc-header">🧮 BMI Calculator</h3>
+          <div class="form-group">
+            <label class="form-label" for="bmiWeight">Weight (kg)</label>
+            <input type="number" id="bmiWeight" class="form-control" placeholder="e.g. 70" step="0.5">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="bmiHeight">Height (cm)</label>
+            <input type="number" id="bmiHeight" class="form-control" placeholder="e.g. 175" step="1">
+          </div>
+          <button class="btn btn-primary" id="btnCalcBMI" style="width: 100%;">Calculate BMI</button>
+          <div class="calc-result-box" id="bmiResult">--</div>
+          <p class="calc-note">Note: These tools are educational and not a substitute for professional medical advice.</p>
+        </div>
+
+        <!-- Heart Rate Status -->
+        <div class="calc-card">
+          <h3 class="calc-header">❤️ Heart Rate Status</h3>
+          <div class="form-group">
+            <label class="form-label" for="heartPulse">Enter Pulse (BPM)</label>
+            <input type="number" id="heartPulse" class="form-control" placeholder="e.g. 72" step="1">
+          </div>
+          <div style="height: 18px;"></div>
+          <button class="btn btn-primary" id="btnCheckPulse" style="width: 100%;">Check Status</button>
+          <div class="calc-result-box" id="heartResult">--</div>
+          <p class="calc-note">Normal resting pulse for healthy adults ranges between 60 - 100 beats per minute.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       HOSPITAL LIVE STATUS
+       ========================================================================== -->
+  <section class="section-padding" id="livestatus">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Hospital Live Status</h2>
+        <p class="section-subtitle">Real-time facility utilization and bed availability dashboard</p>
+      </div>
+
+      <div class="live-status-grid">
+        <div class="live-status-card">
+          <div class="live-stat-val">{{ stats['available_beds'] if stats else 120 }}</div>
+          <div class="live-stat-label">Available Beds</div>
+        </div>
+
+        <div class="live-status-card">
+          <div class="live-stat-val">{{ stats['patients_waiting'] if stats else 16 }}</div>
+          <div class="live-stat-label">Patients Waiting</div>
+        </div>
+
+        <div class="live-status-card">
+          <div class="live-stat-val">{{ stats['ambulances_ready'] if stats else 8 }}</div>
+          <div class="live-stat-label">Ambulances Ready</div>
+        </div>
+
+        <div class="live-status-card">
+          <div class="live-stat-val" id="liveClock">12:33:56</div>
+          <div class="live-stat-label">Current Time</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       BLOOD BANK AVAILABILITY
+       ========================================================================== -->
+  <section class="section-padding" id="bloodbank" style="background: rgba(8, 123, 250, 0.03);">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Blood Bank Availability</h2>
+        <p class="section-subtitle">Live monitored blood inventory. Tested and verified for emergency transfusion.</p>
+      </div>
+
+      <div class="blood-bank-grid">
+        {% for b in blood_bank %}
+        <div class="blood-card">
+          <div class="blood-group-badge">{{ b['blood_group'] }}</div>
+          <div class="blood-units">{{ b['units_available'] }}</div>
+          <div class="blood-unit-label">Units</div>
+          <span class="blood-status-badge badge-{{ b['status']|lower }}">{{ b['status'] }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       HEALTH TIPS (AUTO-CHANGING CAROUSEL)
+       ========================================================================== -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Health Tips</h2>
+        <p class="section-subtitle">Daily physician-recommended wellness insights for a healthier life</p>
+      </div>
+
+      <div class="tips-carousel-box">
+        <div class="tip-content-slide" id="tipSlide">
+          <i class="fa-solid fa-droplet tip-icon"></i>
+          <h3 class="tip-title">Stay Hydrated Daily</h3>
+          <p class="tip-text">Drinking 2.5 to 3 liters of water each day improves kidney function, aids cellular digestion, and keeps energy levels steady.</p>
+        </div>
+        <div class="tip-dots" id="tipDots"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       BOOK AMBULANCE
+       ========================================================================== -->
+  <section class="section-padding" id="ambulance" style="background: rgba(255, 42, 109, 0.03);">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" style="color: #ff2a6d;"><i class="fa-solid fa-truck-medical"></i> Book Ambulance</h2>
+        <p class="section-subtitle">Rapid emergency dispatch equipped with advanced life support and trained paramedics</p>
+      </div>
+
+      <div class="booking-card">
+        <form id="ambulanceForm">
+          <div class="form-grid-3">
+            <div class="form-group">
+              <label class="form-label" for="ambPatientName">Patient Name *</label>
+              <input type="text" id="ambPatientName" class="form-control" placeholder="Full Name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="ambPhone">Phone Number *</label>
+              <input type="tel" id="ambPhone" class="form-control" placeholder="+91 9876543210" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="ambType">Emergency Type</label>
+              <select id="ambType" class="form-control">
+                <option value="Cardiac Emergency">Cardiac Emergency</option>
+                <option value="Accident / Trauma">Accident / Trauma</option>
+                <option value="Respiratory Distress">Respiratory Distress</option>
+                <option value="General Emergency" selected>General Emergency</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="ambLocation">Pickup Location & Landmark *</label>
+            <input type="text" id="ambLocation" class="form-control" placeholder="Street, Apartment, Landmark, City Area" required>
+          </div>
+
+          <div style="text-align: center; margin-top: 25px;">
+            <button type="submit" class="btn btn-primary" style="background: linear-gradient(135deg, #ff2a6d 0%, #ff5722 100%); box-shadow: 0 8px 25px rgba(255, 42, 109, 0.4);">
+              <i class="fa-solid fa-truck-medical"></i> Book Ambulance Now
+            </button>
+          </div>
+          <p style="text-align: center; font-size: 0.8rem; color: #64748b; margin-top: 15px;">
+            ⚠️ Demonstration booking confirmation. For immediate critical emergency, dial 108 or our 24x7 desk: +91 9876543210.
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       APPOINTMENT BOOKING FORM
+       ========================================================================== -->
+  <section class="section-padding" id="appointment">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Book An Appointment</h2>
+        <p class="section-subtitle">Skip waiting lines by scheduling your consultation in advance</p>
+      </div>
+
+      <div class="booking-card">
+        <form id="appointmentForm">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="aptName">Patient Full Name *</label>
+              <input type="text" id="aptName" class="form-control" placeholder="e.g. John Doe" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="aptAge">Patient Age</label>
+              <input type="number" id="aptAge" class="form-control" placeholder="e.g. 35" min="1" max="120">
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="aptPhone">Phone Number *</label>
+              <input type="tel" id="aptPhone" class="form-control" placeholder="+91 9876543210" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="aptEmail">Email Address</label>
+              <input type="email" id="aptEmail" class="form-control" placeholder="name@example.com">
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="aptDept">Department *</label>
+              <select id="aptDept" class="form-control" required>
+                <option value="" disabled selected>Select Department</option>
+                <option value="Cardiology">Cardiology</option>
+                <option value="Neurology">Neurology</option>
+                <option value="Orthopedics">Orthopedics</option>
+                <option value="Pediatrics">Pediatrics</option>
+                <option value="General Surgery">General Surgery</option>
+                <option value="Pulmonology">Pulmonology</option>
+                <option value="General Medicine">General Medicine</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="aptDoctor">Preferred Doctor</label>
+              <select id="aptDoctor" class="form-control">
+                <option value="Any Available Specialist">Any Available Specialist</option>
+                {% for doc in doctors %}
+                <option value="{{ doc['name'] }}">{{ doc['name'] }} ({{ doc['specialization'] }})</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="aptDate">Appointment Date *</label>
+              <input type="date" id="aptDate" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="aptTime">Preferred Time Slot *</label>
+              <select id="aptTime" class="form-control" required>
+                <option value="" disabled selected>Select Time Slot</option>
+                <option value="09:00 AM - 10:00 AM">09:00 AM - 10:00 AM</option>
+                <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
+                <option value="11:30 AM - 12:30 PM">11:30 AM - 12:30 PM</option>
+                <option value="02:00 PM - 03:00 PM">02:00 PM - 03:00 PM</option>
+                <option value="03:30 PM - 04:30 PM">03:30 PM - 04:30 PM</option>
+                <option value="05:00 PM - 06:00 PM">05:00 PM - 06:00 PM</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="aptSymptoms">Symptoms / Medical Reason</label>
+            <textarea id="aptSymptoms" class="form-control" rows="3" placeholder="Briefly describe your health symptoms, medical history or consultation goal..."></textarea>
+          </div>
+
+          <div style="text-align: center; margin-top: 25px;">
+            <button type="submit" class="btn btn-primary">
+              <i class="fa-solid fa-calendar-check"></i> Confirm Appointment
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FLOATING ELEMENTS (BOT & UTILITY BUTTONS)
+       ========================================================================== -->
+  <!-- Floating Chatbot Button (Bottom-Left) -->
+  <button class="floating-bot-btn" id="floatingBotBtn" title="CareBot AI Assistant">
+    <i class="fa-solid fa-robot"></i>
+  </button>
+
+  <!-- Chatbot Window -->
+  <div class="chatbot-box" id="chatbotBox">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <i class="fa-solid fa-hospital-user"></i>
+        <strong>CareBot Assistant</strong>
+      </div>
+      <button class="chat-close-btn" id="closeChatBtn">&times;</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-bubble bot">
+        Hello! I am CareBot, your virtual healthcare assistant. How can I assist you with hospital appointments, emergency ambulance, doctors, or bed availability today?
+      </div>
+    </div>
+    <div class="chat-quick-tags">
+      <button class="chat-tag" data-msg="Book Appointment">📅 Book Appointment</button>
+      <button class="chat-tag" data-msg="Emergency Ambulance">🚨 Ambulance</button>
+      <button class="chat-tag" data-msg="Available Beds">🛏️ Live Beds</button>
+      <button class="chat-tag" data-msg="Blood Bank Stock">🩸 Blood Bank</button>
+      <button class="chat-tag" data-msg="Doctor Timings">⏰ Doctor Hours</button>
+    </div>
+    <div class="chat-input-bar">
+      <input type="text" id="chatInput" placeholder="Ask CareBot a question...">
+      <button id="chatSendBtn" aria-label="Send"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <!-- Floating Utility Buttons on Right Side (Matching Prototype Screenshot) -->
+  <div class="floating-utilities">
+    <button class="util-btn" title="Quick Appointment" onclick="location.href='#appointment'"><i class="fa-regular fa-calendar-plus"></i></button>
+    <button class="util-btn" title="Hospital Gallery" onclick="location.href='#gallery'"><i class="fa-solid fa-camera"></i></button>
+    <button class="util-btn util-emergency" title="Emergency Hotline" onclick="alert('Emergency Hotline: +91 9876543210 (Available 24x7)')"><i class="fa-solid fa-phone-volume"></i></button>
+    <button class="util-btn" title="Health Tips" onclick="location.href='#calculator'"><i class="fa-solid fa-play"></i></button>
+  </div>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTopBtn" title="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- Global Modal Popup -->
+  <div class="modal-overlay" id="globalModal">
+    <div class="modal-content">
+      <button class="modal-close" id="modalCloseBtn">&times;</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="brand-logo" style="margin-bottom: 15px; color: #FFFFFF;">
+            <div class="logo-icon"><i class="fa-solid fa-hospital"></i></div>
+            <span style="color: #FFFFFF;">CarePlus Hospital</span>
+          </div>
+          <p style="font-size: 0.9rem; line-height: 1.7; margin-bottom: 20px;">
+            CarePlus Hospital is a multispeciality healthcare facility offering comprehensive tertiary care, world-class surgical units, and compassionate patient rehabilitation.
+          </p>
+          <div style="display: flex; gap: 15px; font-size: 1.2rem;">
+            <a href="#" style="color: #00BCD4;"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" style="color: #00BCD4;"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" style="color: #00BCD4;"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" style="color: #00BCD4;"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Our Services</a></li>
+            <li><a href="#departments">Departments</a></li>
+            <li><a href="#doctors">Specialist Doctors</a></li>
+            <li><a href="#calculator">Health Calculator</a></li>
+            <li><a href="{{ url_for('admin_login') }}"><i class="fa-solid fa-lock"></i> Staff / Admin Portal</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Medical Centers</h4>
+          <ul class="footer-links">
+            <li><a href="#departments">Cardiology Care</a></li>
+            <li><a href="#departments">Neurology Institute</a></li>
+            <li><a href="#departments">Orthopedic & Joint Center</a></li>
+            <li><a href="#departments">Pediatric & Neonatal ICU</a></li>
+            <li><a href="#departments">Pulmonology & Chest Medicine</a></li>
+            <li><a href="#departments">24x7 Trauma & Emergency</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Hospital Contact</h4>
+          <p style="font-size: 0.9rem; margin-bottom: 10px;">
+            <i class="fa-solid fa-location-dot" style="color: var(--secondary); margin-right: 8px;"></i>
+            100 Health Boulevard, Medical Enclave, City Center
+          </p>
+          <p style="font-size: 0.9rem; margin-bottom: 10px;">
+            <i class="fa-solid fa-phone" style="color: var(--secondary); margin-right: 8px;"></i>
+            Emergency: +91 9876543210
+          </p>
+          <p style="font-size: 0.9rem; margin-bottom: 10px;">
+            <i class="fa-solid fa-envelope" style="color: var(--secondary); margin-right: 8px;"></i>
+            careplus@hospital.com
+          </p>
+          <p style="font-size: 0.9rem;">
+            <i class="fa-solid fa-clock" style="color: var(--secondary); margin-right: 8px;"></i>
+            OPD Hours: Mon - Sat (08:30 AM - 07:00 PM)
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 CarePlus Hospital. All Rights Reserved. Accredited by NABH & JCI standards.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main JavaScript Engine -->
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

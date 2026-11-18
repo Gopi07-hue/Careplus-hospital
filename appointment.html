@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Doctor Appointment – CarePlus Hospital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-info">
+        <span class="top-bar-item"><i class="fa-solid fa-phone"></i> +91 9876543210</span>
+        <span class="top-bar-item"><i class="fa-solid fa-envelope"></i> careplus@hospital.com</span>
+      </div>
+      <div class="top-bar-badges">
+        <span class="top-bar-item"><i class="fa-solid fa-truck-medical"></i> 24×7 Emergency</span>
+        <span class="top-bar-item badge-emergency"><i class="fa-solid fa-certificate"></i> NABH Accredited</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="main-header">
+    <div class="container">
+      <a href="{{ url_for('index') }}" class="brand-logo">
+        <div class="logo-icon"><i class="fa-solid fa-hospital"></i></div>
+        <span class="logo-text">CarePlus Hospital</span>
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+        <a href="{{ url_for('index') }}#services" class="nav-link">Services</a>
+        <a href="{{ url_for('index') }}#departments" class="nav-link">Departments</a>
+        <a href="{{ url_for('index') }}#doctors" class="nav-link">Doctors</a>
+        <a href="{{ url_for('index') }}#gallery" class="nav-link">Gallery</a>
+        <a href="{{ url_for('appointment') }}" class="nav-link active">Appointment</a>
+        <a href="{{ url_for('contact') }}" class="nav-link">Contact</a>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <button class="btn-dark-toggle" id="darkToggleBtn">
+          <i class="fa-solid fa-moon"></i> Dark
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Banner -->
+  <div style="background: var(--primary-gradient); color: #FFFFFF; padding: 140px 20px 50px; text-align: center;">
+    <div class="container">
+      <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 10px;">Book Doctor Appointment</h1>
+      <p style="font-size: 1.1rem; opacity: 0.95; max-width: 600px; margin: 0 auto;">Schedule in-person or telemedicine consultation with top hospital consultants.</p>
+    </div>
+  </div>
+
+  <!-- Form Content -->
+  <div class="section-padding">
+    <div class="container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div style="background: {% if category=='success' %}#dcfce7; color:#15803d; border:1px solid #86efac;{% else %}#fee2e2; color:#b91c1c; border:1px solid #fca5a5;{% endif %} padding: 16px 20px; border-radius: 12px; margin-bottom: 30px; font-weight: 500; text-align: center;">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <div class="booking-card">
+        <form method="POST" action="{{ url_for('appointment') }}">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="patient_name">Patient Full Name *</label>
+              <input type="text" name="patient_name" id="patient_name" class="form-control" placeholder="e.g. David Miller" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="age">Patient Age *</label>
+              <input type="number" name="age" id="age" class="form-control" placeholder="e.g. 42" min="1" max="120" required>
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="phone">Phone Number *</label>
+              <input type="tel" name="phone" id="phone" class="form-control" placeholder="+91 9876543210" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="email">Email Address</label>
+              <input type="email" name="email" id="email" class="form-control" placeholder="david.miller@example.com">
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="department">Select Department *</label>
+              <select name="department" id="department" class="form-control" required>
+                <option value="" disabled selected>Choose Specialty</option>
+                <option value="Cardiology">Cardiology</option>
+                <option value="Neurology">Neurology</option>
+                <option value="Orthopedics">Orthopedics</option>
+                <option value="Pediatrics">Pediatrics</option>
+                <option value="General Surgery">General Surgery</option>
+                <option value="Pulmonology">Pulmonology</option>
+                <option value="General Medicine">General Medicine</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="doctor_name">Choose Doctor</label>
+              <select name="doctor_name" id="doctor_name" class="form-control">
+                <option value="First Available Consultant">First Available Consultant</option>
+                {% for doc in doctors %}
+                <option value="{{ doc['name'] }}">{{ doc['name'] }} – {{ doc['specialization'] }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="appointment_date">Appointment Date *</label>
+              <input type="date" name="appointment_date" id="appointment_date" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="preferred_time">Preferred Time Slot *</label>
+              <select name="preferred_time" id="preferred_time" class="form-control" required>
+                <option value="" disabled selected>Select Slot</option>
+                <option value="09:00 AM - 10:00 AM">09:00 AM - 10:00 AM</option>
+                <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
+                <option value="11:30 AM - 12:30 PM">11:30 AM - 12:30 PM</option>
+                <option value="02:00 PM - 03:00 PM">02:00 PM - 03:00 PM</option>
+                <option value="03:30 PM - 04:30 PM">03:30 PM - 04:30 PM</option>
+                <option value="05:00 PM - 06:00 PM">05:00 PM - 06:00 PM</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="symptoms">Symptoms or Reason for Consultation</label>
+            <textarea name="symptoms" id="symptoms" class="form-control" rows="4" placeholder="Describe symptoms, duration, current medications, or notes for the specialist..."></textarea>
+          </div>
+
+          <div style="text-align: center; margin-top: 30px;">
+            <button type="submit" class="btn btn-primary">
+              <i class="fa-solid fa-calendar-check"></i> Book Appointment Now
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 CarePlus Hospital. All Rights Reserved. Accredited by NABH standards.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

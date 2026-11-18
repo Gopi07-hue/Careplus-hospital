@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard – CarePlus Hospital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    .admin-navbar {
+      background: #FFFFFF;
+      padding: 16px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .admin-container {
+      max-width: 1300px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 35px;
+    }
+    .overview-card {
+      background: #FFFFFF;
+      padding: 25px;
+      border-radius: 18px;
+      box-shadow: 0 6px 20px rgba(8, 123, 250, 0.06);
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .overview-icon {
+      width: 55px;
+      height: 55px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+    }
+    .admin-section {
+      background: #FFFFFF;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(8, 123, 250, 0.06);
+      padding: 30px;
+      margin-bottom: 35px;
+    }
+    .admin-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+      border-bottom: 1px solid #EDF2F7;
+      padding-bottom: 15px;
+    }
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .admin-table th, .admin-table td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid #EDF2F7;
+    }
+    .admin-table th {
+      background: #F8FAFC;
+      color: #475569;
+      font-weight: 600;
+    }
+    .table-wrapper {
+      overflow-x: auto;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .status-confirmed, .status-arrived { background: #DCFCE7; color: #166534; }
+    .status-pending, .status-dispatched { background: #FEF9C3; color: #854D0E; }
+    .status-cancelled { background: #FEE2E2; color: #991B1B; }
+    .status-completed { background: #E0E7FF; color: #3730A3; }
+  </style>
+</head>
+<body style="background: #F1F5F9; color: #334155;">
+
+  <!-- Admin Navbar -->
+  <header class="admin-navbar">
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <a href="{{ url_for('index') }}" class="brand-logo" style="font-size: 1.3rem;">
+        <div class="logo-icon" style="width: 36px; height: 36px; font-size: 1.1rem;"><i class="fa-solid fa-hospital"></i></div>
+        <span>CarePlus Administration</span>
+      </a>
+      <span style="background: #E0F2FE; color: #0284C7; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 12px; text-transform: uppercase;">Portal</span>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 18px;">
+      <a href="{{ url_for('index') }}" target="_blank" class="btn btn-light" style="padding: 7px 16px; font-size: 0.88rem;">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i> View Website
+      </a>
+      <a href="{{ url_for('admin_logout') }}" class="btn" style="background: #FEE2E2; color: #B91C1C; padding: 7px 16px; font-size: 0.88rem;">
+        <i class="fa-solid fa-right-from-bracket"></i> Logout
+      </a>
+    </div>
+  </header>
+
+  <main class="admin-container">
+
+    <!-- Flash Notifications -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div style="background: {% if category=='success' %}#DCFCE7; color:#166534; border:1px solid #86EFAC;{% else %}#E0F2FE; color:#0369A1; border:1px solid #BAE6FD;{% endif %} padding: 14px 20px; border-radius: 12px; margin-bottom: 25px; font-weight: 500;">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- Top Metric Overview Cards -->
+    <div class="overview-grid">
+      <div class="overview-card">
+        <div class="overview-icon" style="background: #EFF6FF; color: #3B82F6;">
+          <i class="fa-solid fa-calendar-check"></i>
+        </div>
+        <div>
+          <div style="font-size: 1.7rem; font-weight: 800; color: #0F172A;">{{ appointments|length }}</div>
+          <div style="font-size: 0.88rem; color: #64748B;">Total Appointments</div>
+        </div>
+      </div>
+
+      <div class="overview-card">
+        <div class="overview-icon" style="background: #FEF2F2; color: #EF4444;">
+          <i class="fa-solid fa-truck-medical"></i>
+        </div>
+        <div>
+          <div style="font-size: 1.7rem; font-weight: 800; color: #0F172A;">{{ ambulance_requests|length }}</div>
+          <div style="font-size: 0.88rem; color: #64748B;">Ambulance Dispatches</div>
+        </div>
+      </div>
+
+      <div class="overview-card">
+        <div class="overview-icon" style="background: #F0FDF4; color: #10B981;">
+          <i class="fa-solid fa-user-doctor"></i>
+        </div>
+        <div>
+          <div style="font-size: 1.7rem; font-weight: 800; color: #0F172A;">{{ doctors|length }}</div>
+          <div style="font-size: 0.88rem; color: #64748B;">Specialist Doctors</div>
+        </div>
+      </div>
+
+      <div class="overview-card">
+        <div class="overview-icon" style="background: #FFFBEB; color: #F59E0B;">
+          <i class="fa-solid fa-bed-pulse"></i>
+        </div>
+        <div>
+          <div style="font-size: 1.7rem; font-weight: 800; color: #0F172A;">{{ stats['available_beds'] if stats else 120 }}</div>
+          <div style="font-size: 0.88rem; color: #64748B;">Available Beds</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. APPOINTMENTS MANAGEMENT -->
+    <section class="admin-section">
+      <div class="admin-section-header">
+        <h3 style="font-size: 1.3rem; font-weight: 700; color: #0F172A;">
+          <i class="fa-solid fa-calendar-days" style="color: var(--primary); margin-right: 8px;"></i>
+          Patient Appointments ({{ appointments|length }})
+        </h3>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Patient</th>
+              <th>Phone</th>
+              <th>Department</th>
+              <th>Doctor</th>
+              <th>Schedule</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for apt in appointments %}
+            <tr>
+              <td><strong>#CP-{{ "%04d"|format(apt['id']) }}</strong></td>
+              <td>
+                <div style="font-weight: 600; color: #0F172A;">{{ apt['patient_name'] }}</div>
+                <div style="font-size: 0.78rem; color: #64748B;">Age: {{ apt['age'] or 'N/A' }} | {{ apt['email'] or 'No email' }}</div>
+              </td>
+              <td>{{ apt['phone'] }}</td>
+              <td><span style="font-weight: 500;">{{ apt['department'] }}</span></td>
+              <td>{{ apt['doctor_name'] or 'Any Consultant' }}</td>
+              <td>
+                <div>{{ apt['appointment_date'] }}</div>
+                <div style="font-size: 0.78rem; color: #64748B;">{{ apt['preferred_time'] }}</div>
+              </td>
+              <td>
+                <span class="status-badge status-{{ apt['status']|lower }}">{{ apt['status'] }}</span>
+              </td>
+              <td>
+                <div style="display: flex; gap: 6px; align-items: center;">
+                  <!-- Update status form -->
+                  <form method="POST" action="{{ url_for('admin_update_appointment_status', id=apt['id']) }}" style="display: inline-flex;">
+                    <select name="status" onchange="this.form.submit()" style="padding: 4px 8px; border-radius: 8px; font-size: 0.8rem; border: 1px solid #CBD5E1;">
+                      <option value="Confirmed" {% if apt['status']=='Confirmed' %}selected{% endif %}>Confirmed</option>
+                      <option value="Pending" {% if apt['status']=='Pending' %}selected{% endif %}>Pending</option>
+                      <option value="Completed" {% if apt['status']=='Completed' %}selected{% endif %}>Completed</option>
+                      <option value="Cancelled" {% if apt['status']=='Cancelled' %}selected{% endif %}>Cancelled</option>
+                    </select>
+                  </form>
+
+                  <!-- Delete button -->
+                  <form method="POST" action="{{ url_for('admin_delete_appointment', id=apt['id']) }}" onsubmit="return confirm('Delete this appointment record?');" style="display: inline-flex;">
+                    <button type="submit" style="background: none; border: none; color: #EF4444; cursor: pointer; padding: 4px;" title="Delete">
+                      <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="8" style="text-align: center; color: #94A3B8; padding: 25px;">No appointment records found.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 2. AMBULANCE REQUESTS -->
+    <section class="admin-section">
+      <div class="admin-section-header">
+        <h3 style="font-size: 1.3rem; font-weight: 700; color: #0F172A;">
+          <i class="fa-solid fa-truck-medical" style="color: #EF4444; margin-right: 8px;"></i>
+          Emergency Ambulance Dispatches ({{ ambulance_requests|length }})
+        </h3>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Request ID</th>
+              <th>Patient</th>
+              <th>Phone</th>
+              <th>Pickup Location</th>
+              <th>Emergency Type</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for amb in ambulance_requests %}
+            <tr>
+              <td><strong>#AMB-{{ "%04d"|format(amb['id']) }}</strong></td>
+              <td style="font-weight: 600; color: #0F172A;">{{ amb['patient_name'] }}</td>
+              <td>{{ amb['phone'] }}</td>
+              <td>{{ amb['location'] }}</td>
+              <td><span style="color: #DC2626; font-weight: 500;">{{ amb['emergency_type'] }}</span></td>
+              <td><span class="status-badge status-{{ amb['status']|lower }}">{{ amb['status'] }}</span></td>
+              <td>
+                <form method="POST" action="{{ url_for('admin_update_ambulance_status', id=amb['id']) }}" style="display: inline-flex;">
+                  <select name="status" onchange="this.form.submit()" style="padding: 4px 8px; border-radius: 8px; font-size: 0.8rem; border: 1px solid #CBD5E1;">
+                    <option value="Dispatched" {% if amb['status']=='Dispatched' %}selected{% endif %}>Dispatched</option>
+                    <option value="Arrived" {% if amb['status']=='Arrived' %}selected{% endif %}>Arrived</option>
+                    <option value="Completed" {% if amb['status']=='Completed' %}selected{% endif %}>Completed</option>
+                  </select>
+                </form>
+              </td>
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="7" style="text-align: center; color: #94A3B8; padding: 25px;">No active ambulance dispatches.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 3. BLOOD BANK AVAILABILITY UPDATER -->
+    <section class="admin-section">
+      <div class="admin-section-header">
+        <h3 style="font-size: 1.3rem; font-weight: 700; color: #0F172A;">
+          <i class="fa-solid fa-droplet" style="color: #EF4444; margin-right: 8px;"></i>
+          Blood Bank Unit Availability Manager
+        </h3>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px;">
+        {% for b in blood_bank %}
+        <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 16px; padding: 18px; text-align: center;">
+          <div style="font-size: 1.8rem; font-weight: 800; color: #DC2626; margin-bottom: 5px;">{{ b['blood_group'] }}</div>
+          <div style="font-size: 0.85rem; color: #64748B; margin-bottom: 12px;">Status: <strong class="status-badge badge-{{ b['status']|lower }}">{{ b['status'] }}</strong></div>
+
+          <form method="POST" action="{{ url_for('admin_update_blood_bank') }}" style="display: flex; gap: 8px; justify-content: center;">
+            <input type="hidden" name="blood_group" value="{{ b['blood_group'] }}">
+            <input type="number" name="units" value="{{ b['units_available'] }}" min="0" max="999" class="form-control" style="width: 85px; text-align: center; padding: 6px;">
+            <button type="submit" class="btn btn-primary" style="padding: 6px 14px; font-size: 0.85rem;">Save</button>
+          </form>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- 4. DOCTORS DIRECTORY & ADD DOCTOR -->
+    <section class="admin-section">
+      <div class="admin-section-header">
+        <h3 style="font-size: 1.3rem; font-weight: 700; color: #0F172A;">
+          <i class="fa-solid fa-user-doctor" style="color: var(--primary); margin-right: 8px;"></i>
+          Manage Doctors Roster
+        </h3>
+      </div>
+
+      <!-- Add Doctor Accordion / Box -->
+      <div style="background: #F8FAFC; border-radius: 16px; padding: 22px; margin-bottom: 25px; border: 1px solid #E2E8F0;">
+        <h4 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 15px; color: #0F172A;">Add New Specialist Doctor</h4>
+        <form method="POST" action="{{ url_for('admin_add_doctor') }}">
+          <div class="form-grid-3">
+            <div class="form-group">
+              <label class="form-label">Doctor Name *</label>
+              <input type="text" name="name" class="form-control" placeholder="Dr. Jane Watson" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Department *</label>
+              <input type="text" name="department" class="form-control" placeholder="Cardiology" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Specialization *</label>
+              <input type="text" name="specialization" class="form-control" placeholder="Interventional Cardiologist" required>
+            </div>
+          </div>
+
+          <div class="form-grid-3">
+            <div class="form-group">
+              <label class="form-label">Experience</label>
+              <input type="text" name="experience" class="form-control" placeholder="12+ Years" value="10+ Years">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Rating (1.0 to 5.0)</label>
+              <input type="number" step="0.1" name="rating" class="form-control" placeholder="5.0" value="5.0">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Photo Image URL</label>
+              <input type="url" name="image_url" class="form-control" placeholder="https://images.unsplash.com/...">
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="margin-top: 10px;">
+            <i class="fa-solid fa-plus"></i> Add Doctor to Roster
+          </button>
+        </form>
+      </div>
+
+      <!-- Current Doctors List -->
+      <div class="table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Doctor</th>
+              <th>Department</th>
+              <th>Specialization</th>
+              <th>Experience</th>
+              <th>Rating</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for doc in doctors %}
+            <tr>
+              <td>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <img src="{{ doc['image_url'] }}" alt="" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover;">
+                  <span style="font-weight: 600; color: #0F172A;">{{ doc['name'] }}</span>
+                </div>
+              </td>
+              <td>{{ doc['department'] }}</td>
+              <td>{{ doc['specialization'] }}</td>
+              <td>{{ doc['experience'] }}</td>
+              <td>⭐ {{ doc['rating'] }}</td>
+              <td>
+                <form method="POST" action="{{ url_for('admin_delete_doctor', id=doc['id']) }}" onsubmit="return confirm('Remove doctor from active directory?');">
+                  <button type="submit" style="background: none; border: none; color: #EF4444; cursor: pointer;" title="Delete">
+                    <i class="fa-solid fa-trash-can"></i>
+                  </button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 5. HOSPITAL LIVE STATS CONTROLLER -->
+    <section class="admin-section">
+      <div class="admin-section-header">
+        <h3 style="font-size: 1.3rem; font-weight: 700; color: #0F172A;">
+          <i class="fa-solid fa-sliders" style="color: var(--primary); margin-right: 8px;"></i>
+          Live Facility Dashboard Numbers
+        </h3>
+      </div>
+
+      <form method="POST" action="{{ url_for('admin_update_stats') }}">
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Available Beds (Live)</label>
+            <input type="number" name="available_beds" value="{{ stats['available_beds'] if stats else 120 }}" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Patients Waiting</label>
+            <input type="number" name="patients_waiting" value="{{ stats['patients_waiting'] if stats else 16 }}" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Ambulances Ready</label>
+            <input type="number" name="ambulances_ready" value="{{ stats['ambulances_ready'] if stats else 8 }}" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Total Happy Patients Counter</label>
+            <input type="number" name="happy_patients" value="{{ stats['happy_patients'] if stats else 15000 }}" class="form-control" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="margin-top: 10px;">
+          <i class="fa-solid fa-floppy-disk"></i> Save Dashboard Numbers
+        </button>
+      </form>
+    </section>
+
+    <!-- 6. CONTACT MESSAGES -->
+    <section class="admin-section">
+      <div class="admin-section-header">
+        <h3 style="font-size: 1.3rem; font-weight: 700; color: #0F172A;">
+          <i class="fa-solid fa-envelope" style="color: var(--primary); margin-right: 8px;"></i>
+          Website Contact Messages ({{ messages|length }})
+        </h3>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>From</th>
+              <th>Email / Phone</th>
+              <th>Subject</th>
+              <th>Message</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for msg in messages %}
+            <tr>
+              <td style="font-weight: 600; color: #0F172A;">{{ msg['name'] }}</td>
+              <td>
+                <div>{{ msg['email'] }}</div>
+                <div style="font-size: 0.8rem; color: #64748B;">{{ msg['phone'] or 'N/A' }}</div>
+              </td>
+              <td><span style="font-weight: 500;">{{ msg['subject'] or 'General Inquiry' }}</span></td>
+              <td style="max-width: 380px;">{{ msg['message'] }}</td>
+              <td style="font-size: 0.8rem; color: #64748B;">{{ msg['created_at'] }}</td>
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="5" style="text-align: center; color: #94A3B8; padding: 25px;">No contact inquiries yet.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>
